@@ -11,10 +11,7 @@
 		'spam_check:admin:delete_ip' => 'Delete',
 		'spam_check:admin:confirm_delete_ip' => 'Delete %s?',
 		
-		'spam_check:messages:deleted_ip' => 'IP Deleted.',
-		'spam_check:messages:deleted_ips' => 'IPs Deleted.',
-		'spam_check:errors:could_not_delete_ip' => 'Could not delete IP.',
-		'spam_check:errors:could_not_delete_ips' => 'Could not delete all checked IPs.',
+		'spam_check:messages:deleted_users' => 'Spammers have been deleted.',
 		'spam_check:errors:unknown_ips' => 'IP not found.',
 		'spam_check:admin:no_ips' => 'The IP list is empty.',
 		
