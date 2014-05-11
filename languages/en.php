@@ -25,6 +25,9 @@
 		'spam_check:errors:unknown_users' => 'Unknown users',
 		'spam_check:errors:could_not_delete_users' => 'Could not delete all checked users.',
 		'spam_check:messages:deleted_users' => 'All checked users deleted.',
+		'spam_check:spam_check_input' => 'How many users do you want to check per page ?', 
+		'spam_check:spam_check_remark' => '<strong>Remark :</strong> More users takes more time to process and you risk being temporarily banned by <a href="http://www.stopformspam.com">SFS</a> if you check too many users in one day.', 
+		'spam_check:dns_error' => 'This machine cannot contact www.stopforumspam.com and the plugin will not work. Check your <font color="red"><a href="https://www.centillien.com/dns">DNS settings</font></a> first',
 
 			
 	);

@@ -6,7 +6,14 @@
 include_once(elgg_get_plugins_path() . "spam_check/lib/stopforumspam.php");
 $sfs = new StopForumSpam();
 
-$limit = get_input('limit', 40);
+if(!checkdnsrr('www.stopforumspam.com','A')) {
+    echo elgg_echo('spam_check:dns_error');
+	return;
+}
+
+$spam_check_input = elgg_get_plugin_setting("spam_check_input","spam_check");
+
+$limit = get_input('limit', $spam_check_input);
 $offset = get_input('offset', 0);
 
 $options = array(
@@ -15,6 +22,9 @@ $options = array(
 	'offset' => $offset,
 	'count' => TRUE,
 );
+
+
+
 
 $count = elgg_get_entities($options);
 
