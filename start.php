@@ -19,7 +19,7 @@
         	elgg_extend_view('js/elgg', 'spam_check/js');
 
         	elgg_register_admin_menu_item('administer', 'spammer', 'users');
-		elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
+		//elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
 
 	}
 
