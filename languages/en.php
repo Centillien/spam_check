@@ -6,6 +6,7 @@
 		'admin:users:spammer' => "Check for Spammers",
 		'admin:users:nospammer' => "No Spammers",
 		'admin:users:delete' => "Delete Spammers",
+		'admin:users:delete_incorrect' => "Delete Users",
 		'admin:users:confirm_delete_checked' => "Confirm Delete",
 		'spam_check:admin:ip_date_created' => 'Created %s',
 		'spam_check:admin:delete_ip' => 'Delete',

@@ -19,6 +19,8 @@
         	elgg_extend_view('js/elgg', 'spam_check/js');
 
         	elgg_register_admin_menu_item('administer', 'spammer', 'users');
+		elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
+
 	}
 
         //Register actions
@@ -26,5 +28,22 @@
 	elgg_register_action('spam_check/delete_all', "$action_path/delete_all.php", 'admin');
 	
 
+//GK Future use. Check email using API, but currently having performance issues.
+function url_get_api_contents($szURL)
+{
+        $pCurl = curl_init($szURL);
 
+        curl_setopt($pCurl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($pCurl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($pCurl, CURLOPT_TIMEOUT, 10);
 
+        $szContents = curl_exec($pCurl);
+        $aInfo = curl_getinfo($pCurl);
+
+        if($aInfo['http_code'] === 200)
+        {
+                return $szContents;
+        }
+
+        return false;
+}

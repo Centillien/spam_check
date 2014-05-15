@@ -6,7 +6,7 @@
         <category>enhancement</category>
         <category>spam</category>
         <description>Spam checker to check already registered users for known spam activity</description>
-        <website>http://www.centillien.com</website>
+        <website>https://www.centillien.com</website>
         <copyright>Centillien B.V.</copyright>
         <license>GNU General Public License version 2</license>
         <requires>
