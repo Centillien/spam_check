@@ -3,10 +3,6 @@
  * Admin area to view and delete spam users.
  *
  */
- if(!elgg_is_active_plugin("validate_email")){
-	include_once(elgg_get_plugins_path() . "spam_check/lib/class.check_email.php");
-}
-
 $vmail = new verifyEmail();
 
 if(!checkdnsrr('www.centillien.com','A')) {
@@ -16,9 +12,7 @@ if(!checkdnsrr('www.centillien.com','A')) {
 
 $spam_check_input = elgg_get_plugin_setting("spam_check_input","spam_check");
 
-if(!$spam_check_input) {
-        $spam_check_input = '40';
-}
+$spam_check_input = '30';
 
 $limit = get_input('limit', $spam_check_input);
 $offset = get_input('offset', 0);
@@ -43,7 +37,8 @@ if (!$count) {
 
 $options['count']  = FALSE;
 
-$users = elgg_get_entities($options);
+$users = new ElggBatch('elgg_get_entities', $options);
+
 
 // setup pagination
 $pagination = elgg_view('navigation/pagination',array(

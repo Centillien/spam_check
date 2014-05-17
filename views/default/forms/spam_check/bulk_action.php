@@ -3,7 +3,6 @@
  * Admin area to view and delete spam users.
  *
  */
-include_once(elgg_get_plugins_path() . "spam_check/lib/stopforumspam.php");
 $sfs = new StopForumSpam();
 
 if(!checkdnsrr('www.stopforumspam.com','A')) {
