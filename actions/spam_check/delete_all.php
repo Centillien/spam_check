@@ -2,7 +2,6 @@
 /**
  * Delete a user or users by guid
  *
- * @package Elgg.Core.Plugin
  * @subpackage spam_check
  */
 

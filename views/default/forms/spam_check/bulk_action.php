@@ -5,17 +5,22 @@
  */
 $sfs = new StopForumSpam();
 
-if(!checkdnsrr('www.stopforumspam.com','A')) {
-    echo elgg_echo('spam_check:dns_error');
-	return;
-}
+if (version_compare( PHP_VERSION, '5.3.0', '>=' ) ){
+	if(!checkdnsrr('www.stopforumspam.com','A')) {
+	    echo elgg_echo('spam_check:dns_error');
+        	return;
+	}
+}else {
+
+echo "<b style='color:red;'>Warning!</b> PHP version too old. The plugin might fail";
+
+} 
 
 $spam_check_input = elgg_get_plugin_setting("spam_check_input","spam_check");
 
 if(!$spam_check_input) {
-        $spam_check_input = '40';
+        $spam_check_input = '20';
 }
-
 
 $limit = get_input('limit', $spam_check_input);
 $offset = get_input('offset', 0);
@@ -78,15 +83,17 @@ ___END;
 if (is_array($users) && count($users) > 0) {
 	$html = '<ul class="elgg-list elgg-list-distinct">';
 	foreach ($users as $user) {
+	if(!$user->spam_whitelist){
 		$email = $user->email;
 		$ip_address = $user->ip_address;
         	$args = array('email' => $email, 'ip' => $ip_address, 'username' => $user->name);
-			$spamcheck = $sfs->is_spammer( $args );
+		$spamcheck = $sfs->is_spammer( $args );
         	if ($spamcheck){
 			$html .= "<li id=\"unvalidated-user-{$user->guid}\" class=\"elgg-item spam_check-unvalidated-user-item\">";
 			$html .= elgg_view('spam_check/spammer', array('user' => $user)) . 'With IP address: ' . $ip_address;
 			$html .= '</li>';
 			}
+		}
 	}
 	$html .= '</ul>';
 }

@@ -2,7 +2,7 @@
 /**
  * Spam Checkker
  * This plugin checks your users database for spammers. 
- * Author Gerard Kanter
+ * Author Gerard Kanters
  * copyright Centillien 2013
  * https://www.centillien.com/
  * 
@@ -22,13 +22,15 @@
         	elgg_extend_view('js/elgg', 'spam_check/js');
 
         	elgg_register_admin_menu_item('administer', 'spammer', 'users');
-		elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
+		//GK disabled, still experimental
+		//elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
 
 	}
 
         //Register actions
 	elgg_register_action('spam_check/bulk_action', "$action_path/bulk_action.php", 'admin');
 	elgg_register_action('spam_check/delete_all', "$action_path/delete_all.php", 'admin');
+	elgg_register_action('spam_check/whitelist', "$action_path/whitelist.php", 'admin');
 	
 
 //GK Future use. Check email using API, but currently having performance issues.
@@ -38,7 +40,7 @@ function url_get_api_contents($szURL)
 
         curl_setopt($pCurl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($pCurl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($pCurl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($pCurl, CURLOPT_TIMEOUT, 5);
 
         $szContents = curl_exec($pCurl);
         $aInfo = curl_getinfo($pCurl);

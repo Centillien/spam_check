@@ -1,20 +1,20 @@
 <?php
 /**
- * Admin area to view and delete spam users.
+ * Admin area to view and delete users with incorrect email.
  *
  */
-$vmail = new verifyEmail();
-
-if(!checkdnsrr('www.centillien.com','A')) {
-    echo elgg_echo('spam_check:dns_error');
-	return;
+if (version_compare( PHP_VERSION, '5.3.0', '>=' ) ){
+        if(!checkdnsrr('www.centillien.com','A')) {
+            echo elgg_echo('spam_check:dns_error');
+                return;
+        }
+}else {
+	echo "<b style='color:red;'>Warning!</b> PHP version too old. The plugin might fail";
 }
 
-$spam_check_input = elgg_get_plugin_setting("spam_check_input","spam_check");
+$email_check_input = '10';
 
-$spam_check_input = '30';
-
-$limit = get_input('limit', $spam_check_input);
+$limit = get_input('limit', $email_check_input);
 $offset = get_input('offset', 0);
 
 $options = array(
@@ -42,7 +42,7 @@ $users = new ElggBatch('elgg_get_entities', $options);
 
 // setup pagination
 $pagination = elgg_view('navigation/pagination',array(
-	'base_url' => 'admin/users/spammers',
+	'base_url' => 'admin/users/incorrectemail',
 	'offset' => $offset,
 	'limit' => $limit,
 ));
@@ -70,17 +70,17 @@ ___END;
 if(!empty($users)){
         foreach($users as $user){
                 $email = trim($user->email);
-				$ip_address = $user->ip_address;
-				$url = "https://www.centillien.com/services/api/rest/json?method=validate_email&email=". $email;
+                $ip_address = $user->ip_address;
+                $url = "https://www.centillien.com/services/api/rest/json?method=validate_email&email=". $email;
                 $return = url_get_api_contents($url);
                 $data = json_decode($return, true);
-				if (!is_null($data)) {
+                                if (!is_null($data)) {
                      $email_exists = $data['result'];
                      if ($email_exists != true) {
                          $html .= "<li id=\"unvalidated-user-{$user->guid}\" class=\"elgg-item spam_check-unvalidated-user-item\">";
                          $html .= elgg_view('spam_check/spammer', array('user' => $user)) . 'This user appears to have an invalid email addres';
                          $html .= '</li>';
-					}
+                                        }
                 }
         }
 }

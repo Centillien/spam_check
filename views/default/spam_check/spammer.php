@@ -1,9 +1,8 @@
 <?php
 /**
- * Formats and list an unvalidated user.
+ * Formats and list spammers.
  *
- * @package Elgg.Core.Plugin
- * @subpackage UserValidationByEmail.Administration
+ * @subpackage SpamCheck.Administration
  */
 
 $user = elgg_extract('user', $vars);
@@ -21,7 +20,15 @@ $delete = elgg_view('output/confirmlink', array(
 	'href' => "action/admin/user/delete?guid=$user->guid",
 	'text' => elgg_echo('spam_check:admin:delete')
 ));
-$menu = 'test';
+
+$whitelist = elgg_view('output/confirmlink', array(
+	'confirm' => elgg_echo('spam_check:confirm_whitelist', array($user->username)),
+	'href' => "action/spam_check/whitelist?guid=$user->guid",
+	'text' => elgg_echo('spam_check:admin:whitelisted')
+));
+
+
+$menu = 'spam';
 $block = <<<___END
 	<label>$user->username: "$user->name" &lt;$user->email&gt;</label>
 	<div class="spam_check-unvalidated-user-details">
@@ -31,8 +38,8 @@ ___END;
 
 $menu = <<<__END
 	<ul class="elgg-menu elgg-menu-general elgg-menu-hz float-alt">
+	    <li>$whitelist</li>
 		<li>$delete</li>
-	</ul>
 __END;
 
 echo elgg_view_image_block($checkbox, $block, array('image_alt' => $menu));

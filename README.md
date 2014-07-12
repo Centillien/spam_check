@@ -1,7 +1,5 @@
 Spam Check
 ===========
- * Checks your already registered users agains StopSpamForum 
- * After activation, go to Admin section, Users and click on Check Spammers
-
-Todo
- * Add other spam checks, like email existance, other database or blacklists
+ * Checks your already registered users against StopSpamForum database.
+ * Allow admin to whitelist users that are not considered to be a spammer.
+ * After activation, go to Admin section, Users and click on Check Spammers.

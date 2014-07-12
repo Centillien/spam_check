@@ -3,14 +3,15 @@
 	$english = array(
 		
 		//Admin menu
-		'admin:users:spammer' => "Check for Spammers",
-		'admin:users:nospammer' => "No Spammers",
-		'admin:users:delete' => "Delete Spammers",
-		'admin:users:delete_incorrect' => "Delete Users",
-		'admin:users:confirm_delete_checked' => "Confirm Delete",
+		'admin:users:spammer' => 'Check for Spammers',
+		'admin:users:incorrectemail' => 'Users with incorrect email',
+		'admin:users:nospammer' => 'No Spammers',
+		'admin:users:delete' => 'Delete Spammers',
+		'admin:users:delete_incorrect' => 'Delete Users',
+		'admin:users:confirm_delete_checked' => 'Confirm Delete',
 		'spam_check:admin:ip_date_created' => 'Created %s',
-		'spam_check:admin:delete_ip' => 'Delete',
-		'spam_check:admin:confirm_delete_ip' => 'Delete %s?',
+		'admin:user:whitelist:no' => "User not whitelisted",
+		'admin:user:whitelist:yes' => "User whitelisted",
 		
 		'spam_check:messages:deleted_users' => 'Spammers have been deleted.',
 		'spam_check:errors:unknown_ips' => 'IP not found.',
@@ -19,7 +20,9 @@
 		'spam_check:admin:unvalidated' => 'Unvalidated',
 		'spam_check:admin:user_created' => 'Registered %s',
 		'spam_check:admin:delete' => 'Delete',
+		'spam_check:admin:whitelisted' => 'Whitelist',
 		'spam_check:confirm_delete' => 'Delete %s?',
+		'spam_check:confirm_whitelist' => 'Whitelist %s?',
 		'spam_check:confirm_delete_checked' => 'Delete checked users?',
 		'spam_check:check_all' => 'All',
 
@@ -33,5 +36,4 @@
 			
 	);
 	add_translation("en",$english);
-
 ?>

@@ -4,6 +4,7 @@
  * PHP Class to check up email
  *
  * @author Gerard Kanters / Centillien.com
+ * Make sure you fill in the correct domain name in $_fromDomain
  */
 class verifyEmail {
 
@@ -39,7 +40,7 @@ class verifyEmail {
 
     public function __construct() {
         $this->_fromName = 'noreply';
-        $this->_fromDomain = 'localhost';
+        $this->_fromDomain = 'centillien.com';
         $this->_port = 25;
         $this->_maxConnectionTimeout = 30;
         $this->_maxStreamTimeout = 5;
@@ -108,7 +109,7 @@ class verifyEmail {
             $mxs = $this->getMXrecords($domain);
             $fp = false;
             $timeout = ceil($this->_maxConnectionTimeout / count($mxs));
-	    $timeout = 3;
+	    $timeout = 5;
             foreach ($mxs as $host) {
 //                if ($fp = @fsockopen($host, $this->_port, $errno, $errstr, $timeout)) {
                 if ($fp = @stream_socket_client("tcp://" . $host . ":" . $this->_port, $errno, $errstr, $timeout)) {
@@ -129,7 +130,6 @@ class verifyEmail {
                 //$this->_fsockquery($fp, "VRFY " . $email);
                 $this->_fsockquery($fp, "MAIL FROM: <" . $this->_fromName . '@' . $this->_fromDomain . ">");
                 $code = $this->_fsockquery($fp, "RCPT TO: <" . $user . '@' . $domain . ">");
-                $this->_fsockquery($fp, "RSET");
                 $this->_fsockquery($fp, "QUIT");
                 fclose($fp);
                 if ($code == '250') {
