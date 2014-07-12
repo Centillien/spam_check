@@ -40,7 +40,7 @@ class verifyEmail {
 
     public function __construct() {
         $this->_fromName = 'noreply';
-        $this->_fromDomain = 'centillien.com';
+        $this->_fromDomain = 'localhost';
         $this->_port = 25;
         $this->_maxConnectionTimeout = 30;
         $this->_maxStreamTimeout = 5;
