@@ -19,7 +19,7 @@ echo "<b style='color:red;'>Warning!</b> PHP version too old. The plugin might f
 $spam_check_input = elgg_get_plugin_setting("spam_check_input","spam_check");
 
 if(!$spam_check_input) {
-        $spam_check_input = '20';
+        $spam_check_input = '40';
 }
 
 $limit = get_input('limit', $spam_check_input);

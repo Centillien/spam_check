@@ -12,9 +12,13 @@ if (version_compare( PHP_VERSION, '5.3.0', '>=' ) ){
 	echo "<b style='color:red;'>Warning!</b> PHP version too old. The plugin might fail";
 }
 
-$email_check_input = '10';
+$spam_check_input = elgg_get_plugin_setting("spam_check_input","spam_check");
 
-$limit = get_input('limit', $email_check_input);
+if(!$spam_check_input) {
+        $spam_check_input = '40';
+}
+
+$limit = get_input('limit', $spam_check_input);
 $offset = get_input('offset', 0);
 
 $options = array(
@@ -69,6 +73,7 @@ ___END;
 
 if(!empty($users)){
         foreach($users as $user){
+	if(!$user->spam_whitelist){
                 $email = trim($user->email);
                 $ip_address = $user->ip_address;
                 $url = "https://www.centillien.com/services/api/rest/json?method=validate_email&email=". $email;
@@ -80,8 +85,9 @@ if(!empty($users)){
                          $html .= "<li id=\"unvalidated-user-{$user->guid}\" class=\"elgg-item spam_check-unvalidated-user-item\">";
                          $html .= elgg_view('spam_check/spammer', array('user' => $user)) . 'This user appears to have an invalid email addres';
                          $html .= '</li>';
-                                        }
+                         }
                 }
+	}
         }
 }
 
