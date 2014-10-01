@@ -9,7 +9,10 @@
  * @package spam_check
  */
 
-	elgg_register_event_handler('init', 'system', 'spam_check_init');
+elgg_register_event_handler('init', 'system', 'spam_check_init');
+
+function spam_check_init() {
+
 	$action_path = elgg_get_plugins_path() . "spam_check/actions/spam_check";
 
         // Register the required classes
@@ -31,7 +34,7 @@
 	elgg_register_action('spam_check/bulk_action', "$action_path/bulk_action.php", 'admin');
 	elgg_register_action('spam_check/delete_all', "$action_path/delete_all.php", 'admin');
 	elgg_register_action('spam_check/whitelist', "$action_path/whitelist.php", 'admin');
-	
+}	
 
 //GK Future use. Check email using API, but currently having performance issues.
 function url_get_api_contents($szURL)
