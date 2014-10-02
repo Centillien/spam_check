@@ -19,16 +19,11 @@ function spam_check_init() {
         elgg_register_classes(elgg_get_plugins_path() . 'spam_check/classes/');
 
         //Admin menu for spam check GK
-	if(elgg_in_context("admin") && elgg_is_admin_logged_in()){
-
-        	elgg_extend_view('css/admin', 'spam_check/css');
-        	elgg_extend_view('js/elgg', 'spam_check/js');
-
-        	elgg_register_admin_menu_item('administer', 'spammer', 'users');
-		//GK disabled, still experimental
-		//elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
-
-	}
+	elgg_extend_view('css/admin', 'spam_check/css');
+        elgg_extend_view('js/elgg', 'spam_check/js');
+       	elgg_register_admin_menu_item('administer', 'spammer', 'users');
+	//GK disabled, still experimental
+	//elgg_register_admin_menu_item('administer', 'incorrectemail', 'users');
 
         //Register actions
 	elgg_register_action('spam_check/bulk_action', "$action_path/bulk_action.php", 'admin');
