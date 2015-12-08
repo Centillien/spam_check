@@ -128,9 +128,7 @@
                         return $object;
                         }else{
                                 error_log('Function curl_exec does not exist, install php-curl', 0);
-                        }
-                }
-
+	                }
  	}
- }
+}
  ?>
