@@ -116,10 +116,21 @@
  	*/
  	protected static function poll_json( $url )
  	{
- 		$json = file_get_contents( $url );
- 		$object = json_decode($json);
- 		
- 		return $object;
+                if (function_exists('curl_exec')){
+                        $pCurl = curl_init($url);
+                        curl_setopt($pCurl, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($pCurl, CURLOPT_FOLLOWLOCATION, true);
+                        curl_setopt($pCurl, CURLOPT_TIMEOUT, 5);
+
+                        $json = curl_exec( $pCurl );
+                        $object = json_decode($json);
+
+                        return $object;
+                        }else{
+                                error_log('Function curl_exec does not exist, install php-curl', 0);
+                        }
+                }
+
  	}
  }
  ?>
